@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gemini Canva Prompt Builder</title>
+<style>
+body { font-family: Arial; padding:20px; }
+button { margin:4px; padding:8px 12px; }
+textarea { width:100%; height:200px; margin-top:10px; }
+</style>
+</head>
+
+<body>
+
+<h2>Gemini Canva Prompt Builder</h2>
+
+<h4>1. Pilih Jenis Video</h4>
+<button onclick="setType('Realistic')">Realistic</button>
+<button onclick="setType('ASMR')">ASMR</button>
+<button onclick="setType('2D Cartoon')">2D Cartoon</button>
+<button onclick="setType('3D Cartoon')">3D Cartoon</button>
+
+<h4>2. Subjek</h4>
+<input id="subject" placeholder="contoh: a cute panda">
+
+<h4>3. Mood</h4>
+<button onclick="setMood('calm')">Calm</button>
+<button onclick="setMood('happy')">Happy</button>
+<button onclick="setMood('cute')">Cute</button>
+
+<br><br>
+<button onclick="generate()">Generate Prompt</button>
+
+<textarea id="output" placeholder="Prompt akan muncul di sini"></textarea>
+<button onclick="copy()">Copy Prompt</button>
+
+<script>
+let type = "";
+let mood = "";
+
+function setType(t){ type = t; }
+function setMood(m){ mood = m; }
+
+function generate(){
+  const subject = document.getElementById("subject").value;
+  document.getElementById("output").value =
+`Create a short video with the following concept:
+
+The main subject is ${subject}.
+
+Visual style:
+${type} style.
+
+Mood:
+${mood}.
+
+The video should feel natural and visually pleasing.
+Avoid distortion or glitches.`;
+}
+
+function copy(){
+  navigator.clipboard.writeText(
+    document.getElementById("output").value
+  );
+}
+</script>
+
+</body>
+</html>
